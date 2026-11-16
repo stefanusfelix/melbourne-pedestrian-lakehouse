@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: pedestrian
+    schema: bronze
+    tables:
+      - name: pedestrian_counts_raw

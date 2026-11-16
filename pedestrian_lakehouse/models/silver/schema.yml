@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: hourly_counts
+    description: One row per sensor per hour as reported by the source.
+    columns:
+      - name: count_id
+        data_tests:
+          - unique
+          - not_null
+      - name: location_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('sensors')
+                field: location_id
+
+  - name: hourly_counts_filled
+    description: All 24 hours for every day a sensor reported, with unreported hours filled as zero.
+    columns:
+      - name: count_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: sensors
+    description: One row per sensor with its latest name and coordinates.
+    columns:
+      - name: location_id
+        data_tests:
+          - unique
+          - not_null
